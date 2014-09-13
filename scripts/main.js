@@ -12,8 +12,8 @@ FE.CURRENTENEMY = 0;
 FE.OPPONENTS = [
 	{
 		'attack'   : 300,
-		// 'health'   : 1,
-		'health'   : 1500,
+		'health'   : 1,
+		// 'health'   : 1500,
 		'type'     : 'EARTH',
 		'weakness' : 'AIR',
 		'active'   : true,
