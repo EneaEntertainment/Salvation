@@ -1,3 +1,8 @@
+/**
+	Font is encoded in Dword
+	
+	Generated font image is missing space between glyphs, which can cause some problems when image is scalled down - need to be done
+*/
 FE.MakeFont = function(p) {
 	this.color = p.color;
 	this.shadow = p.shadow;

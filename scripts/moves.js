@@ -11,11 +11,21 @@ FE.Moves = function(game, layer) {
 	this.layer.addChild(this.movesText);
 };
 
+/**
+*	---------------------------------------------------
+*	FE.Moves._align
+*	---------------------------------------------------
+**/
 FE.Moves.prototype._align = function() {
 	this.movesText.x = this.game.width / 2  -this.movesText.textWidth / 2;
 	this.movesText.y = 6;
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Moves.setMoves
+*	---------------------------------------------------
+**/
 FE.Moves.prototype.setMoves = function(t) {
 	var _self = this;
 	var o = {

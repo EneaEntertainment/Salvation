@@ -8,7 +8,6 @@ FE.Intro = function(game, layer) {
 	this.game = game;
 	this.layer = layer;
 	
-	
 	this.draw();
 	this.fadeIn();
 };
@@ -119,6 +118,5 @@ FE.Intro.prototype = {
 				a.start();
 			})
 			.start()
-			
 	}
 }

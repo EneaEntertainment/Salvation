@@ -8,7 +8,10 @@ FE.Player = function(game, image, properties) {
 	this.image = image;
 	this.properties = properties;
 	this.health = this.properties.health;
+	
+	// opponent have only one move, player 5
 	this.defaultMoves = this.properties.enemy ? 1 : 5;
+	this.moves = this.defaultMoves;
 	
 	/*
 		0 - FIRE
@@ -16,16 +19,21 @@ FE.Player = function(game, image, properties) {
 		2 - EARTH
 		3 - AIR
 		
-		all elements deals 10damage
+		all elements dealing 10 damage to opponent
 		0 (FIRE)  is weak to 1 (WATER)
 		1 (WATER) is weak to 0 (FIRE) etc
  	*/
 	this.damages = [1,0,3,2];
 	this.isDead = false;
 	
-	this.moves = this.defaultMoves;
+	// inventory array holding items
+	// not used in this version
 	this.inventory = [];
+	
+	// player's window color
 	this._activeColors = ['#FFFFFF', '#ae4a12', '#DD6020'];
+	// inactive window colors
+	// not used in this version
 	this._inactiveColors = ['#a0a0a0', '#808080', '#909090'];
 	
 	MGE.DisplayObjectContainer.call(this);
@@ -36,7 +44,13 @@ FE.Player = function(game, image, properties) {
 FE.Player.prototype = Object.create(MGE.DisplayObjectContainer.prototype);
 FE.Player.prototype.constructor = FE.Player;
 
+/**
+*	---------------------------------------------------
+*	FE.Player.getDamage
+*	---------------------------------------------------
+**/
 FE.Player.prototype.getDamage = function(val, attack) {
+	// determine attack strength 
 	var dmg = this.damages[val];
 	var multiplier = (FE.TYPES[this.properties.type] == dmg ? 1.5 : (FE.TYPES[this.properties.type] == val ? 0.5 : 1));
 	var damage = Math.round(attack * multiplier);
@@ -47,12 +61,19 @@ FE.Player.prototype.getDamage = function(val, attack) {
 		this.isDead = true;
 		this.animateDeath();
 	}
+	// update health bar
 	this.update();
+	// update health text
 	this.healthText.setText('HEALTH   : ' + this.health);
-	// console.log(damage);
+
 	return damage;
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Player.animateDeath
+*	---------------------------------------------------
+**/
 FE.Player.prototype.animateDeath = function() {
 	var _self = this;
 	
@@ -75,13 +96,23 @@ FE.Player.prototype.animateDeath = function() {
 	.start()	
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Player.update
+*	---------------------------------------------------
+**/
 FE.Player.prototype.update = function() {
 	if (this.health >= 0 && this.health <= this.properties.health) this.healthBar.scaleX = (this.health / this.properties.health);
 	if (this.health <= 0) this.healthBar.scaleX = 0;
-	// console.log('Im dead : ' + this.isDead);
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Player.reset
+*	---------------------------------------------------
+**/
 FE.Player.prototype.reset = function() {
+	// reset player's values, health bar, avatar - used at the start of round
 	this.health = this.properties.health;
 	this.update();
 	this.attackText.setText('ATTACK   : ' + this.properties.attack);
@@ -97,6 +128,11 @@ FE.Player.prototype.reset = function() {
 	this.moves = this.defaultMoves;
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Player.draw
+*	---------------------------------------------------
+**/
 FE.Player.prototype.draw = function() {
 	this.bg = new FE.Button('', this.game.font, 120, 161, (this.properties.active ? this._activeColors : this._inactiveColors)).applyParams({
 	}).addTo(this);

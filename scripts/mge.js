@@ -1,3 +1,8 @@
+/**
+	Micro Gaming Engine
+	
+	it's not perfect, maybe it have bugs, but it's something you could build on
+*/
 (function() {
 
 var MGE = MGE || {};
@@ -247,7 +252,6 @@ MGE.createCanvas = function(w, h) {
 	var canvas           = document.createElement('canvas');
 	canvas.width         = w;
 	canvas.height        = h;
-	// canvas.style.display = 'inline';
 	canvas.style.display = 'none';
 	document.body.appendChild(canvas);
 	var context = canvas.getContext("2d");
@@ -467,7 +471,6 @@ MGE.Sprite = function(texture, crop) {
 				_self._crop = crop;
 			}
 			_self._loaded = true;
-			// MGE.TextureCache[texture] = this;
 		}
 		
 		img.src = texture;		
@@ -589,6 +592,7 @@ MGE.BitmapText.prototype.updateText = function() {
 /**
 *	---------------------------------------------------
 *	MGE.Tweener
+*   based on Sole's Tweener
 *	---------------------------------------------------
 **/
 MGE.Tweener = MGE.Tweener || ( function () {
@@ -599,7 +603,6 @@ MGE.Tweener = MGE.Tweener || ( function () {
 			_tweenList.push(t);
 		},
 
-		//TODO: zmazat, zbytocne to bude zaberat miesto
 		getAll: function () {
 			return _tweenList;
 		},
@@ -703,7 +706,7 @@ MGE.Tweener.Tween = function (object) {
 					}
 				}
 			} else {
-				// tween still active
+				// tween is still active
 				var value = MGE.Easing[_easing](elapsed);
 
 				for (var property in _endValues) {

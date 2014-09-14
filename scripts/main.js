@@ -1,3 +1,15 @@
+/**
+	Salvation Of Fallen Angel
+	js13kGames entry by Enea Entertainment
+	www.enea.sk
+	twitter: @EneaGames
+	
+	Match3 game
+	
+	Join three or more elements of same type to perform attack.
+	Click/tap on first element and then on the second element to swap them.
+	Swapped elements don't need to be neighbouring
+*/
 (function() {
 
 var FE = FE || {};
@@ -12,7 +24,6 @@ FE.CURRENTENEMY = 0;
 FE.OPPONENTS = [
 	{
 		'attack'   : 300,
-		// 'health'   : 1,
 		'health'   : 1500,
 		'type'     : 'EARTH',
 		'weakness' : 'AIR',
@@ -94,7 +105,6 @@ FE.initTextures = function() {
 	// opponent will use same textures. Will be drawn later to make sure that all images are already cached
 	game.player = new FE.Player(game, MGE.TextureCache.angel.src, {
 		'attack'   : 10,
-		// 'health'   : 50,
 		'health'   : 2000,
 		'type'     : 'FIRE',
 		'weakness' : 'WATER',
@@ -169,6 +179,7 @@ FE.initTextures = function() {
 	
 	game.overLayer.area = new MGE.HitArea(0, 0, 320, 480);
 	game.overLayer.area.active = false;
+	
 	// give device enough time to create and cache all images
 	// play intro here
 	new FE.Intro(game, game.introLayer);

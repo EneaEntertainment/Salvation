@@ -17,6 +17,7 @@ FE.CreateLayers = function(game) {
 	game.gameLayer = new MGE.DisplayObjectContainer();
 	game.gameLayer.visible = false;
 	game.stage.addChild(game.gameLayer);
+	
 		// players container
 		game.playersContainer = new MGE.DisplayObjectContainer();
 		// game.playersContainer.visible = false;

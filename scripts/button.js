@@ -27,11 +27,21 @@ FE.Button = function(text, font, width, height, colors) {
 FE.Button.prototype = Object.create(MGE.Sprite.prototype);
 FE.Button.prototype.constructor = FE.Button;
 
+/**
+*	---------------------------------------------------
+*	FE.Button._align
+*	---------------------------------------------------
+**/
 FE.Button.prototype._align = function() {
 	this.text.x = -this.text.textWidth / 2;
 	this.text.y = ~~(-this.text.textHeight / 2);
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Button.setText
+*	---------------------------------------------------
+**/
 FE.Button.prototype.setText = function(t) {
 	this.text.setText(t);
 	this._align();

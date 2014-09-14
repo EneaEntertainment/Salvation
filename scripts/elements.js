@@ -31,6 +31,11 @@ FE.Elements = function(game, layer, whoStarts) {
 FE.Elements.prototype = Object.create(MGE.DisplayObjectContainer.prototype);
 FE.Elements.prototype.constructor = FE.Elements;
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.init
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.init = function() {
 	this.removeAll();
 
@@ -46,6 +51,11 @@ FE.Elements.prototype.init = function() {
 	}	
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.initPool
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.initPool = function() {
 	this.poolContainer = new MGE.DisplayObjectContainer();
 	this.addChild(this.poolContainer);
@@ -75,6 +85,11 @@ FE.Elements.prototype.initPool = function() {
 	}).addTo(this.comboPoolContainer);
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.getFromPool
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.getFromPool = function(which) {
 	var tmp;
 	
@@ -92,10 +107,20 @@ FE.Elements.prototype.getFromPool = function(which) {
 	return this[which][i];
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.interactive
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.interactive = function(val) {
 	this.area.active = val;
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.animateRemoved
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.animateRemoved = function(removed, callback) {
 	for (var i in removed) {
 		var tmp = this.getFromPool('_pool');
@@ -125,6 +150,11 @@ FE.Elements.prototype.animateRemoved = function(removed, callback) {
 	}	
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.animateOneRemoved
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.animateOneRemoved = function(removed, delay, callback) {
 	var _self = this;
 	
@@ -162,6 +192,11 @@ FE.Elements.prototype.animateOneRemoved = function(removed, delay, callback) {
 	.start()
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.animateDamage
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.animateDamage = function(xxx, who, callback) {
 	for (var i=0; i < this.textures.length; i++) {
 		if (xxx.texture.src == this.textures[i].src) break;
@@ -203,6 +238,11 @@ FE.Elements.prototype.animateDamage = function(xxx, who, callback) {
 	.start()	
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.animateOpponent
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.animateOpponent = function(who) {
 	if (who.isDead) return;
 	var _self = this;
@@ -223,6 +263,11 @@ FE.Elements.prototype.animateOpponent = function(who) {
 	.start()	
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.checkMove
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.checkMove = function(start, end) {
 	var removedItems = [];
 	var removedItems2 = [];
@@ -255,6 +300,11 @@ FE.Elements.prototype.checkMove = function(start, end) {
 	}
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.applyGravity
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.applyGravity = function() {
 	var self = this;
 	this.falling = true;
@@ -276,6 +326,11 @@ FE.Elements.prototype.applyGravity = function() {
 	);
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.checkCombo
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.checkCombo = function(callback) {
 	var self = this;
 
@@ -296,6 +351,11 @@ FE.Elements.prototype.checkCombo = function(callback) {
 	}
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.refill
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.refill = function(s) {
 	var newItems = this.game.grid.refillGrid();
 	var self = this;
@@ -325,6 +385,11 @@ FE.Elements.prototype.refill = function(s) {
 	}
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.showComboWords
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.showComboWords = function(kery, callback) {
 	var self = this;
 	if (this.animatingCombo) {
@@ -343,6 +408,11 @@ FE.Elements.prototype.showComboWords = function(kery, callback) {
 	});
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.animateComboWord
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.animateComboWord = function(kery, callback) {
 	var txt = kery + 'X COMBO';
 	var cmb = this.comboPoolContainer.children[0];
@@ -389,6 +459,11 @@ FE.Elements.prototype.animateComboWord = function(kery, callback) {
 	.start()	
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.reorderFallenSprites
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.reorderFallenSprites = function(s) {
 	// return fallen sprites back to original position
 	for (var i in s) {
@@ -400,6 +475,11 @@ FE.Elements.prototype.reorderFallenSprites = function(s) {
 	this.resetSprites(s);
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.resetSprites
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.resetSprites = function(s) {
 	for (var i=0; i < this.game.grid.size.y; i++) {
 		for (var j=0; j < this.game.grid.size.x; j++) {
@@ -414,9 +494,13 @@ FE.Elements.prototype.resetSprites = function(s) {
 	}	
 }
 	
+/**
+*	---------------------------------------------------
+*	FE.Elements.fallDownSpritesAnimation
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.fallDownSpritesAnimation = function(s, callback) {
 	if (this.animating) {
-		console.log('fallDownSpritesAnimation still animating... return');
 		return;
 	}
 	var self = this;
@@ -457,6 +541,11 @@ FE.Elements.prototype.fallDownSpritesAnimation = function(s, callback) {
 		.start()	
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.checkMovesCount
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.checkMovesCount = function() {
 	if (this.game.player.isDead || this.game.opponent.isDead) {
 		this.interactive(false);
@@ -467,6 +556,11 @@ FE.Elements.prototype.checkMovesCount = function() {
 	}
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.opponentAttack
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.opponentAttack = function() {
 	var _self = this;
 	var pool1 = this.getFromPool('_pool');
@@ -539,9 +633,14 @@ FE.Elements.prototype.opponentAttack = function() {
 	.start()	
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.roundOver
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.roundOver = function() {
-	console.log('round over');
 	this.whosTurnItIs = !this.whosTurnItIs;
+	
 	// opponent's move
 	if (this.whosTurnItIs == 1) {
 		this.opponentAttack();
@@ -552,10 +651,14 @@ FE.Elements.prototype.roundOver = function() {
 	}
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.gameOver
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.gameOver = function() {
 	var _self = this;
 	this.interactive(false);
-	// this.visible = false;
 	
 	this.game.overLayer.visible = true;	
 	this.game.overLayer.area.active = true;
@@ -615,14 +718,17 @@ FE.Elements.prototype.gameOver = function() {
 			_self.game.opponent.reset();
 			_self.game.player.reset();
 			_self.game.overLayer.visible = false;
-			// _self.visible = true;
 			_self.interactive(true);
 			_self.game.moves.setMoves(_self.game.player.moves.toString());
 		}
 	}
-	console.log('game over');
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.doDecision
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.doDecision = function(val) {
 	var _self = this;
 	
@@ -665,6 +771,11 @@ FE.Elements.prototype.doDecision = function(val) {
 	}
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.createHitArea
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.createHitArea = function() {
 	var _self = this;
 	
@@ -675,12 +786,22 @@ FE.Elements.prototype.createHitArea = function() {
 	}	
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.determinePosition
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.determinePosition = function(pos, area) {
 	var x = Math.floor((pos.x - area.x) / 51);
 	var y = Math.floor((pos.y - area.y) / 51);
 	return {'col':x, 'row':y}
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.highlight
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.highlight = function(pos, f, t, callback) {
 	var _self = this;
 	var o = { s: f };
@@ -702,6 +823,11 @@ FE.Elements.prototype.highlight = function(pos, f, t, callback) {
 	.start()
 }
 
+/**
+*	---------------------------------------------------
+*	FE.Elements.swap
+*	---------------------------------------------------
+**/
 FE.Elements.prototype.swap = function(pos1, pos2, callback) {
 	var _self = this;
 	
@@ -738,7 +864,6 @@ FE.Elements.prototype.swap = function(pos1, pos2, callback) {
 		visible: false
 	});	
 
-	
 	var o = { 
 		x1: pool1.x,
 		y1: pool1.y,

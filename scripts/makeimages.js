@@ -52,6 +52,9 @@ FE.decodeImage = function(encoded) {
     return output;	
 }
 
+/**
+	images are encoded in layers
+*/
 FE.images = {
 	'angel' : {
 		'#88a1a7' : '0ºaoazaofjfihoaoahht',
@@ -97,6 +100,7 @@ FE.images = {
 		'#61d740' : '0½anbmbmckdcaffiekd',
 		'#2c9d14' : '0Ďabakadaiaebfbeacefao'
 	},	
+	// not used in this version
 	'healthPotion' : {
 		'#9f6c2f' : '0vdldlabalabalabalabakadaiafagahaeajadajadajadajaeahaghd'
 	}
